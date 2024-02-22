@@ -16,14 +16,16 @@ public class BallController : MonoBehaviour
 
     public bool inPlay;
     public Vector3 ballStartPos;
-   
-    
+
+    private Vector3 direction = new Vector3(0, 0, 0);
+
+
     // Start is called before the first frame update
     void Start()
     {
         //Debug.Log("hello world"); //print to console
 
-        Launch();
+        
     }
 
     // Update is called once per frame
@@ -32,13 +34,21 @@ public class BallController : MonoBehaviour
         if (inPlay == false)
         {
             transform.position = ballStartPos;
-            Launch();
+            //Launch();
+            
+            //press SPACE to launch
+            if (Input.GetKey(KeyCode.Space))
+            {
+                inPlay = true;
+                Launch();
+            }
         }
+
+        
     }
 
     void Launch()
     {
-        Vector3 direction = new Vector3(0, 0, 0);
 
         xDir = Random.Range(0, 2);
         //Debug.Log("xDir = " + xDir);
@@ -75,6 +85,10 @@ public class BallController : MonoBehaviour
         {
             rbBall.velocity = Vector3.zero;
             inPlay = false;
+        }
+       if (collision.gameObject.tag == "Paddle")
+        {
+            //rbBall.AddForce(force);
         }
     }
 }
