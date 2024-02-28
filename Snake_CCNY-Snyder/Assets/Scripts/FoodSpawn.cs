@@ -28,8 +28,8 @@ public class FoodSpawn : MonoBehaviour
 
     void Spawn()
     {
-        int xPos = (int)Random.Range(wallLeft.position.x+1, wallRight.position.x-1);
-        int yPos = (int)Random.Range(wallTop.position.y-1, wallBottom.position.y+1);
+        int xPos = (int)Random.Range(wallLeft.position.x+2, wallRight.position.x-2);
+        int yPos = (int)Random.Range(wallTop.position.y-2, wallBottom.position.y+2);
 
         Instantiate(foodPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
     }
