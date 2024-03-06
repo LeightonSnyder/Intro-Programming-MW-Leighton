@@ -8,7 +8,8 @@ public class Snake : MonoBehaviour
 {
     //GLOBAL VARS
     Vector3 dir = Vector3.right;
-    //float Speed = 0.3f;
+    float snakeSpeed = 0.3f;
+
 
 
     //TAIL VARS
@@ -16,10 +17,12 @@ public class Snake : MonoBehaviour
     bool ate = false;
     public GameObject tailPrefab;
 
+    public GameManager myManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("MoveSnake", 0.3f, 0.3f);//replace 2nd 0.3f w "speed"
+        InvokeRepeating("MoveSnake", 0.3f, 0.3f);
     }
 
     // Update is called once per frame
@@ -40,11 +43,11 @@ public class Snake : MonoBehaviour
         
         if (ate)
         {
-            //Debug.Log("ate =" + ate);
+            //Create new tail section in head's previous location
             GameObject tailSec = (GameObject)Instantiate(tailPrefab, gap, Quaternion.identity);
-            tail.Insert(0, tailSec.transform);
+            tail.Insert(0, tailSec.transform); //Add tail section to tail list
 
-            ate = false;
+            ate = false; //Reset ate variable to false
         }
 
         //check if snake has tail
@@ -63,7 +66,10 @@ public class Snake : MonoBehaviour
     private void ChangeDirection()
     {
         if (Input.GetKey(KeyCode.LeftArrow)) //Move left
+        {
             dir = Vector3.left;
+            snakeSpeed = 0.01f;
+        }
         else if (Input.GetKey(KeyCode.RightArrow)) //Move right
             dir = Vector3.right;
         else if (Input.GetKey(KeyCode.UpArrow)) //Move up
@@ -78,6 +84,13 @@ public class Snake : MonoBehaviour
         {
             ate = true;
             Destroy(collision.gameObject);
+            //Change score
+            myManager.FoodEaten();
+        }
+
+        if (collision.gameObject.tag == "Tail" || collision.gameObject.tag == "Wall") //detect game ending collision
+        {
+            Debug.Log("OUCH!!!");
         }
     }
 }
