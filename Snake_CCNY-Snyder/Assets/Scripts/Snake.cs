@@ -8,6 +8,7 @@ public class Snake : MonoBehaviour
 {
     //GLOBAL VARS
     Vector3 dir = Vector3.right;
+    bool isMoving = false;
     float snakeSpeed = 0.3f;
 
 
@@ -28,6 +29,8 @@ public class Snake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         ChangeDirection();
     }
 
@@ -65,16 +68,16 @@ public class Snake : MonoBehaviour
 
     private void ChangeDirection()
     {
-        if (Input.GetKey(KeyCode.LeftArrow)) //Move left
+        if (Input.GetKey(KeyCode.LeftArrow) && dir != Vector3.right) //Move left
         {
             dir = Vector3.left;
-            snakeSpeed = 0.01f;
+            //snakeSpeed = 0.01f; 
         }
-        else if (Input.GetKey(KeyCode.RightArrow)) //Move right
+        else if (Input.GetKey(KeyCode.RightArrow) && dir != Vector3.left) //Move right
             dir = Vector3.right;
-        else if (Input.GetKey(KeyCode.UpArrow)) //Move up
+        else if (Input.GetKey(KeyCode.UpArrow) && dir != Vector3.down) //Move up
             dir = Vector3.up;
-        else if (Input.GetKey(KeyCode.DownArrow)) //Move down
+        else if (Input.GetKey(KeyCode.DownArrow) && dir != Vector3.up) //Move down
             dir = Vector3.down;
     }
 

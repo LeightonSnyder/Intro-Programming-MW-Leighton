@@ -60,4 +60,9 @@ public class SceneChanger : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
+
+    public void MoveToScene(int sceneID)
+    {
+        SceneManager.LoadScene(sceneID);
+    }
 }
