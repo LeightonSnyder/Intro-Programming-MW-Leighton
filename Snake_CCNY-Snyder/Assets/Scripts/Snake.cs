@@ -8,8 +8,8 @@ public class Snake : MonoBehaviour
 {
     //GLOBAL VARS
     Vector3 dir = Vector3.right;
-    bool isMoving = false;
-    float snakeSpeed = 0.3f;
+    //bool isMoving = false;
+    //float snakeSpeed = 0.3f;
 
 
 
@@ -23,15 +23,22 @@ public class Snake : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("MoveSnake", 0.3f, 0.3f);
+        //InvokeRepeating("MoveSnake", 0.3f, 0.3f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
+        StartCoroutine(SnakeMove());
+        //isMoving = true;
         ChangeDirection();
+    }
+
+    private IEnumerator SnakeMove()
+    {
+        yield return new WaitForSeconds(5);
+        MoveSnake();
+        Debug.Log("P1 Moved");
     }
 
     void MoveSnake()
@@ -56,13 +63,11 @@ public class Snake : MonoBehaviour
         //check if snake has tail
         else if (tail.Count > 0)
         {
-            //move last tail segment to head's previous position
-            tail.Last().position = gap;
+            tail.Last().position = gap;//move last tail segment to head's previous position
 
             //keep tail list in order
-            //add last tail segment to the front of the list and remove from the back
-            tail.Insert(0, tail.Last());
-            tail.RemoveAt(tail.Count - 1);
+            tail.Insert(0, tail.Last());//add last tail segment to the front of the list
+            tail.RemoveAt(tail.Count - 1);// and remove from the back
         }
     }
 
@@ -96,4 +101,5 @@ public class Snake : MonoBehaviour
             Debug.Log("OUCH!!!");
         }
     }
+
 }
