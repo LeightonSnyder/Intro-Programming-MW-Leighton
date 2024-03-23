@@ -5,10 +5,10 @@ using UnityEngine;
 public class FoodSpawn : MonoBehaviour
 {
     //GLOBAL VARS
-    public GameObject foodPrefab;
+    public GameObject foodPrefab; //Get the food prefab
 
-    //Border positions
-    public Transform wallTop;
+    //Get wall positions
+    public Transform wallTop; 
     public Transform wallBottom;
     public Transform wallLeft;
     public Transform wallRight;
@@ -16,8 +16,7 @@ public class FoodSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Invoke("Spawn", 4);
-        InvokeRepeating("Spawn", 3, 4);
+        InvokeRepeating("Spawn", 3, 1); //spawn food after 3 seconds, and then every second
     }
 
     // Update is called once per frame
@@ -26,11 +25,16 @@ public class FoodSpawn : MonoBehaviour
         
     }
 
-    void Spawn()
+    void Spawn() //called to spawn a food prefab somewhere random within the walls
     {
-        int xPos = (int)Random.Range(wallLeft.position.x+2, wallRight.position.x-2);
-        int yPos = (int)Random.Range(wallTop.position.y-2, wallBottom.position.y+2);
+        int xPos = (int)Random.Range(wallLeft.position.x+2, wallRight.position.x-2);//x position anywhere between
+                                                                                    //the left and right walls,
+                                                                                    //with 2m buffers
+        int yPos = (int)Random.Range(wallTop.position.y-2, wallBottom.position.y+2);//y position anywhere between
+                                                                                    //the top and bottom walls,
+                                                                                    //with 2m buffers
 
-        Instantiate(foodPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
+        Instantiate(foodPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity); //create the food prefab within
+                                                                                  //defined x and y parameters
     }
 }

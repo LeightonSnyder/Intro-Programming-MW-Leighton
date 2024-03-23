@@ -5,12 +5,12 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
-public class Snake : MonoBehaviour
+public class Snake2 : MonoBehaviour
 {
     //GLOBAL VARS
-    Vector3 dir = Vector3.up; //declare default movement direction
+    Vector3 dir = Vector3.down; //declare default movement direction
 
-
+    
 
 
     //TAIL VARS
@@ -23,7 +23,7 @@ public class Snake : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         InvokeRepeating("MoveSnake", 0.5f, 0.1f); //call the MoveSnake after 0.3 seconds
                                                         //and repeat at a regular interval stored in snakeSpeed 
     }
@@ -66,15 +66,15 @@ public class Snake : MonoBehaviour
   
     private void ChangeDirection() //called in Update to change snake's direction
     {
-        if (Input.GetKey(KeyCode.A) && dir != Vector3.right) //if A is held down and the snake isn't moving right
+        if (Input.GetKey(KeyCode.LeftArrow) && dir != Vector3.right) //if left arrow is held down and the snake isn't moving right
         {
             dir = Vector3.left; //change direction to left
         }
-        else if (Input.GetKey(KeyCode.D) && dir != Vector3.left) //if D is held down and the snake isn't moving left
+        else if (Input.GetKey(KeyCode.RightArrow) && dir != Vector3.left) //if right arrow is held down and the snake isn't moving left
             dir = Vector3.right; //change direction to right
-        else if (Input.GetKey(KeyCode.W) && dir != Vector3.down) //if W is held down and the snake isn't moving down
+        else if (Input.GetKey(KeyCode.UpArrow) && dir != Vector3.down) //if up arrow is held down and the snake isn't moving down
             dir = Vector3.up; //change direction to up
-        else if (Input.GetKey(KeyCode.S) && dir != Vector3.up) //if S is held down and the snake isn't moving up
+        else if (Input.GetKey(KeyCode.DownArrow) && dir != Vector3.up) //if down arrow is held down and the snake isn't moving up
             dir = Vector3.down; //change direction to down
 
     }
@@ -85,13 +85,13 @@ public class Snake : MonoBehaviour
         {
             ate = true; //set ate bool to true
             Destroy(collision.gameObject); //destroy the food
-            myManager.FoodEaten();//Change score
+            myManager.FoodEaten2();//Change score
         }
 
         if (collision.gameObject.tag == "Tail" || collision.gameObject.tag == "Wall") //detect game ending collisions
                                                                                       //will a wall or snake segment
         {
-            SceneManager.LoadScene(sceneBuildIndex:3); //switch to the "Player 2 Wins" gameover scene
+            SceneManager.LoadScene(sceneBuildIndex:2); //switch to the "Player 1 Wins" gameover scene
         }
     }
 

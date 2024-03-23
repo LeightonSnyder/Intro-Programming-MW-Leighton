@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; //use Scene Management Library
-                                   /// <summary>
-                                   /// (is there a list or guide to these libraries?)
-                                   /// </summary>
-
+                                   
 public class SceneChanger : MonoBehaviour
 {
-    //GLOBAL VARS
-    public int sceneNumber;
+     //SCENE # GUIDES
      //0 = Start
      //1 = Main
-     //2 = End
+     //2 = Winner P1
+     //3 = Winner P2
     
     // Start is called before the first frame update
     void Start()
@@ -26,8 +23,8 @@ public class SceneChanger : MonoBehaviour
        
     }
 
-    public void MoveToScene(int sceneID)
+    public void MoveToScene(int sceneID) //method for changing scenes that can be called by other scripts
     {
-        SceneManager.LoadScene(sceneID);
+        SceneManager.LoadScene(sceneID); //load the scene from the ID provided in the void
     }
 }
