@@ -13,7 +13,7 @@ public class BasicEnemy : MonoBehaviour
     public Transform[] patrolPoints;//declare and set a Transform variable as an ARRAY, since we need multiple
                                     //Drag and drop your patrol points into the array
     public float moveSpeed = 3; //declare and set moveSpeed
-    public int patrolDestination; //set to default of 0, //declare patrol Destination (will change through script)
+    public int patrolDestination; //set to default of 0, declare patrol Destination (will change through script)
 
     void Start()
     {
@@ -28,11 +28,11 @@ public class BasicEnemy : MonoBehaviour
     //When enemy collides with something...
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //When Enemy collides with Player...(Notice the tag!) 
+        //When Enemy collides with Player 
         if (collision.gameObject.tag == "Player")
         {
             //Debug.Log("hit player");
-            playerControllerScript.TakeDamage(damage); //call and set the TakeDamage(int) to the damamge value from the PlayerController script.
+            playerControllerScript.TakeDamage(damage); //call and set the TakeDamage(int) to the damage value from the PlayerController script.
                                                        //Feed it int damage for TakeDamage() to run
         }
     }
@@ -40,7 +40,7 @@ public class BasicEnemy : MonoBehaviour
     //make the Enemy move between 2 patrol points.
     private void EnemyMovement()
     {
-        //if the patrolDestination is 0...
+        //if the patrolDestination is 0
         if (patrolDestination == 0)
         {
             //move to a patrol destination 0!
@@ -49,7 +49,7 @@ public class BasicEnemy : MonoBehaviour
             //It needs 3 parameters: (current location, target location, the speed with with to move to the target location) 
             //So this line says: transform the position of the enemy this script is on from the current position to the patrol point [position in arrary] at this speed multiplied by Time.deltaTime
 
-            //if the enemy gets reallyyyy close to the desired patrol point (like they're, basically there...)
+            //if the enemy gets reallyyyy close to the desired patrol point (like they're, basically there)
             if (Vector3.Distance(transform.position, patrolPoints[0].position) < 0.2f) //if the distance b/w these 2 objects is less than .2f...
                                                                                        //Distance calculates the distance b/w 2 objects
             {
@@ -68,7 +68,7 @@ public class BasicEnemy : MonoBehaviour
             //It needs 3 parameters: (current location, target location, the speed with with to move to the target location) 
             //So this line says: transform the position of the enemy this script is on from the current position to the patrol point [position in arrary] at this speed multiplied by Time.deltaTime
 
-            //if the enemy gets reallyyyy close to the desired patrol point (like they're, basically there...)
+            //if the enemy gets reallyyyy close to the desired patrol point (like they're, basically there)
             if (Vector3.Distance(transform.position, patrolPoints[1].position) < 0.2f) //if the distance b/w these 2 objects is less than .2f...
                                                                                        //Distance calculates the distance b/w 2 objects
             {

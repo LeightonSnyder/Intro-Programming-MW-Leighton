@@ -57,9 +57,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Surface")
+        //if (collision.gameObject.tag == "Surface")
+        if (collision.gameObject) 
         {
-            isJumping = false;
+            if (playerBody.velocity.y == 0)
+                isJumping = false;
         }
 
         if (collision.gameObject.tag == "Lava")
