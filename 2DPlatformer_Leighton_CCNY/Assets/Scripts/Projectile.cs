@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     //Global Vars
     public Rigidbody2D projectileRb;
+    public PlayerController player;
     public float speed = 10;
 
     //Projectile countdown timer
