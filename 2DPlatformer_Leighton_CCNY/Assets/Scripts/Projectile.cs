@@ -13,10 +13,24 @@ public class Projectile : MonoBehaviour
     public float projectileLife = 2; //time projectile exists = seconds
     public float projectileCount;
 
+    //flip launch direction
+    public PlayerController playerControllerScript;
+    public bool facingLeft;
+
+
     // Start is called before the first frame update
     void Start()
     {
         projectileCount = projectileLife;
+
+        playerControllerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        facingLeft = playerControllerScript.facingLeft;
+
+        if (!facingLeft)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     // Update is called once per frame
@@ -32,7 +46,14 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        projectileRb.velocity = new Vector3(speed, projectileRb.velocity.y, 0);
+        if (facingLeft)
+        {
+            projectileRb.velocity = new Vector3(-speed, projectileRb.velocity.y, 0);
+        }
+        else
+        {
+            projectileRb.velocity = new Vector3(speed, projectileRb.velocity.y, 0);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
