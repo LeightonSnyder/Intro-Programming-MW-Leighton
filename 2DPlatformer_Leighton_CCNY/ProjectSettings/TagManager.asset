@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Door
   - Slot
+  - Battery
   layers:
   - Default
   - TransparentFX

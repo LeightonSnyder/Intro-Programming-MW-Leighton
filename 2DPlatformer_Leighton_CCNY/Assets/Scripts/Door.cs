@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public int doorIndex;
-    public Slot slot;
+    //public int doorIndex;
+    //public Slot slot;
+    //public GameObject door; //set to chosen door in inspector
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +25,12 @@ public class Door : MonoBehaviour
 
     public void OpenSesame(int slotIndex)
     {
-        if (slotIndex == doorIndex)
-        {
-            Destroy(gameObject);
-        }
+        Debug.Log("OpenSesame called");
+        Destroy(gameObject);
+        //if (slotIndex == doorIndex)
+       // {
+           // Debug.Log("DOOR " + doorIndex + " OPEN");
+            //Destroy(gameObject);
+       // }
     }
 }

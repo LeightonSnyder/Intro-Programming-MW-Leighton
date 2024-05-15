@@ -5,7 +5,8 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     //Global vars
-    public Door door;
+    public GameObject[] doors; 
+    public GameObject doorSingle;
     
     public bool activated = false;
     public int slotIndex = 1;
@@ -24,19 +25,30 @@ public class Slot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Battery")
+        if (collision.gameObject.tag == "Battery")
         {
             activated = true;
             Debug.Log("SLOT ACTIVE");
-            door.OpenSesame(1);
+            OpenSesame(slotIndex);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Battery")
+        if (collision.gameObject.tag == "Battery")
         {
             activated = false;
             Debug.Log("SLOT INACTIVE");
         }
+    }
+
+    public void OpenSesame(int slotIndex)
+    {
+        Debug.Log("OpenSesame called");
+        Destroy(doorSingle);
+        //if (slotIndex == doorIndex)
+        // {
+        // Debug.Log("DOOR " + doorIndex + " OPEN");
+        //Destroy(gameObject);
+        // }
     }
 }
