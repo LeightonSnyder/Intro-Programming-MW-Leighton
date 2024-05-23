@@ -5,11 +5,11 @@ using UnityEngine;
 public class Slot : MonoBehaviour
 {
     //Global vars
-    public GameObject[] doors; 
-    public GameObject doorSingle;
+    public GameObject[] doors; //matrix of doors assigned to slot
+    public GameObject doorSingle; //single door assigned to slot
     
     public bool activated = false;
-    public int slotIndex = 1;
+    public int slotIndex = 1; //keeping track of slots; not currently used
 
     // Start is called before the first frame update
     void Start()
@@ -25,30 +25,29 @@ public class Slot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Battery")
+        if (collision.gameObject.tag == "Battery") //when the battery is in the slot
         {
-            activated = true;
-            Debug.Log("SLOT ACTIVE");
-            OpenSesame(slotIndex);
+            activated = true; //set switch to active
+            //Debug.Log("SLOT ACTIVE");
+            OpenSesame(); //call "OpenSeasame" to open the door
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Battery")
+        if (collision.gameObject.tag == "Battery") //if the battery is no longer in the slot
         {
-            activated = false;
-            Debug.Log("SLOT INACTIVE");
+            activated = false; //set switch to inactive
+            //Debug.Log("SLOT INACTIVE");
         }
     }
 
-    public void OpenSesame(int slotIndex)
+    public void OpenSesame()
     {
-        Debug.Log("OpenSesame called");
-        Destroy(doorSingle);
-        //if (slotIndex == doorIndex)
-        // {
-        // Debug.Log("DOOR " + doorIndex + " OPEN");
-        //Destroy(gameObject);
-        // }
+        //Debug.Log("OpenSesame called");
+        Destroy(doorSingle); //destroy door assigned to slot
+        //destroy doors assigned to slot
+        //(a temp measure to get the one case of double doors open)
+        Destroy(doors[1]); 
+        Destroy(doors[0]);
     }
 }

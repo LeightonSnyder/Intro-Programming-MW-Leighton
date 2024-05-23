@@ -20,13 +20,13 @@ public class HealthBar : MonoBehaviour
         
     }
 
-    public void SetMaxHealth(int health)
+    public void SetMaxHealth(int health) //call to set health to max
     {
         slider.maxValue = health;
         slider.value = health;
     }
 
-    public void SetHealth(int health)
+    public void SetHealth(int health) //call to set the health to a specific value
     {
         slider.value = health;
     }

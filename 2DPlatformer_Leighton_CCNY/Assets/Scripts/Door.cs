@@ -11,10 +11,7 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if (slot.activated == true)
-        //{
-            //OpenSesame();
-        //}
+
     }
 
     // Update is called once per frame
@@ -23,14 +20,9 @@ public class Door : MonoBehaviour
         
     }
 
-    public void OpenSesame(int slotIndex)
+    public void OpenSesame(int slotIndex) //"open" door when called by another script
     {
-        Debug.Log("OpenSesame called");
-        Destroy(gameObject);
-        //if (slotIndex == doorIndex)
-       // {
-           // Debug.Log("DOOR " + doorIndex + " OPEN");
-            //Destroy(gameObject);
-       // }
+        //Debug.Log("OpenSesame called");
+        Destroy(gameObject); //destroy the door, "opening" it
     }
 }

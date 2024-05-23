@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     //Global Vars
     public Rigidbody2D playerBody;
-    public float playerSpeed = 0.015f;
+    public SceneChanger sceneChanger; //reference the Scene Changer script, set in inspector
+    public float playerSpeed = 3.2f;
     public float jumpForce = 300;
     public bool isJumping = false;
 
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             //Debug.Log("A pressed");
-            newPos.x -= playerSpeed;
+            newPos.x -= playerSpeed * Time.deltaTime;
             facingLeft = true;
 
             Flip(facingLeft);
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             //Debug.Log("D pressed");
-            newPos.x += playerSpeed;
+            newPos.x += playerSpeed * Time.deltaTime;
             facingLeft = false;
             Flip(facingLeft);
         }
@@ -82,16 +83,25 @@ public class PlayerController : MonoBehaviour
             TakeDamage(2);
         }
 
-        if (collision.gameObject.tag == "Enemy")
+        //if (collision.gameObject.tag == "Enemy")
+        //{
+        //    TakeDamage(3);
+        //}
+        if (collision.gameObject.name == "Exit")
         {
-            TakeDamage(3);
+            sceneChanger.MoveToScene(3);
         }
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBarScript.SetHealth(currentHealth);
+        currentHealth -= damage; //reduce health by damage
+        healthBarScript.SetHealth(currentHealth); //update the healthbar
+
+        if (currentHealth <= 0) //if your health runs out, go to game over scene
+        {
+            sceneChanger.MoveToScene(2);
+        }
     }
 
     void Flip(bool facingLeft)
@@ -108,5 +118,5 @@ public class PlayerController : MonoBehaviour
         }
 
 
-    }
+}
 }

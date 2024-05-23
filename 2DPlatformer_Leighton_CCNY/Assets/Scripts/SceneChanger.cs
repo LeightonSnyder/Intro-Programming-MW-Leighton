@@ -13,6 +13,7 @@ public class SceneChanger : MonoBehaviour
      //0 = Start
      //1 = Main
      //2 = End
+     //3 = Win
     
     // Start is called before the first frame update
     void Start()
@@ -35,11 +36,15 @@ public class SceneChanger : MonoBehaviour
         {
             EndSceneControls();
         }
+        else if (sceneNumber == 3) //in the Win scene
+        {
+            WinSceneControls();
+        }
     }
 
     public void StartSceneControls()
     {
-        if (Input.GetKeyDown(KeyCode.F))  //key down comes true ONCE; get key repeats while pressed
+        if (Input.GetKeyDown(KeyCode.Mouse0))  //key down comes true ONCE; get key repeats while pressed
         {
             SceneManager.LoadScene(1);
         }
@@ -55,13 +60,28 @@ public class SceneChanger : MonoBehaviour
 
     public void EndSceneControls()
     {
-        if (Input.GetKeyDown(KeyCode.F))  //key down comes true ONCE; get key repeats while pressed
+        if (Input.GetKeyDown(KeyCode.N))  //key down comes true ONCE; get key repeats while pressed
         {
             SceneManager.LoadScene(0);
         }
+        if (Input.GetKeyDown(KeyCode.Y))  //key down comes true ONCE; get key repeats while pressed
+        {
+            SceneManager.LoadScene(1);
+        }
+    }
+    public void WinSceneControls()
+    {
+        if (Input.GetKeyDown(KeyCode.N))  //key down comes true ONCE; get key repeats while pressed
+        {
+            SceneManager.LoadScene(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))  //key down comes true ONCE; get key repeats while pressed
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
-    public void MoveToScene(int sceneID)
+    public void MoveToScene(int sceneID) //call me to switch scenes!
     {
         SceneManager.LoadScene(sceneID);
     }
